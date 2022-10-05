@@ -14,8 +14,7 @@ import com.example.ares.databinding.FragmentFirstBinding;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    int uselessVar;
-    int anotherUselessVar;
+
 
     @Override
     public View onCreateView(
