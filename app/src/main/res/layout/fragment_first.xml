@@ -4,25 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ares_red"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
+    <ImageView
+        android:contentDescription="@string/logo"
+        android:id="@+id/logo"
+        android:layout_width="357dp"
+        android:layout_height="210dp"
+        app:srcCompat="@drawable/areslogo"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
+
+    <EditText
+        android:importantForAutofill="no"
+        android:id="@+id/email"
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:background="@drawable/rounded_corners"
+        android:inputType="textEmailAddress"
+        android:gravity="center_horizontal"
+        tools:layout_editor_absoluteX="-16dp"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:hint="@string/emailHint" />
+
+    <EditText
+        android:importantForAutofill="no"
+        android:id="@+id/password"
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:background="@drawable/rounded_corners"
+        android:inputType="textPassword"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        android:hint="@string/passwordHint" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/login"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:layout_marginTop="50dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
