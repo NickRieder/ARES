@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RepairOrderFragment">
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/divider"/>
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/divider"/>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/edit"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/divider"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginBottom="672dp"
+        android:background="?android:attr/listDivider"
+        android:color="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id = "@+id/ro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="RO:"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:background="@null"
+        android:textSize="30dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id = "@+id/roNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintStart_toEndOf="@id/ro"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:background="@null"
+        android:textSize="30dp"/>
+
+
+    <EditText
+        android:id = "@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/roNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:background="@null" />
+
+    <EditText
+        android:id = "@+id/make"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/year"
+        app:layout_constraintStart_toEndOf="@id/year"
+        android:textSize="30dp"
+        android:background="@null"/>
+
+    <EditText
+        android:id = "@+id/model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/year"
+        app:layout_constraintStart_toEndOf="@id/make"
+        android:textSize="30dp"
+        android:background="@null"/>
+
+    <TableLayout
+        android:id="@+id/repair_table"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:stretchColumns="*"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
