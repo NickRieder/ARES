@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378107660573",
+    "project_id": "ares-eed96",
+    "storage_bucket": "ares-eed96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378107660573:android:b174ab920adedfc5c539f4",
+        "android_client_info": {
+          "package_name": "com.example.ares"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378107660573-17usi3tg7a6t82i97u5jvsa44indabj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUaoBSWG2_mb2NGO4F8SPALDEc2Ep9msA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378107660573-17usi3tg7a6t82i97u5jvsa44indabj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
