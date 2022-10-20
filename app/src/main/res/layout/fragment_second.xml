@@ -36,6 +36,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
+    <Button
+        android:id="@+id/button_newRo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Create RO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_ro" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

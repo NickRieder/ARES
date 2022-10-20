@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_repairOrderFragment2"
             app:destination="@id/repairOrderFragment2" />
+        <action
+            android:id="@+id/action_SecondFragment_to_newRepairOrderFragment"
+            app:destination="@id/newRepairOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/repairOrderFragment2"
@@ -35,6 +38,15 @@
         tools:layout="@layout/fragment_repairorder" >
         <action
             android:id="@+id/action_repairOrderFragment2_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newRepairOrderFragment"
+        android:name="com.example.ares.NewRepairOrderFragment"
+        android:label="NewRepairOrderFragment"
+        tools:layout="@layout/fragment_newrepairorder">
+        <action
+            android:id="@+id/action_newRepairOrderFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>
