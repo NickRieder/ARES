@@ -1,5 +1,7 @@
 package com.example.ares;
 
+import static java.util.Objects.isNull;
+
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class RepairOrderFragment extends Fragment {
 
@@ -35,6 +38,7 @@ public class RepairOrderFragment extends Fragment {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RepairOrder currentRo;
+    private Vehicle currentVehicle;
 
     @Override
     public View onCreateView(
@@ -80,6 +84,7 @@ public class RepairOrderFragment extends Fragment {
                         if (task.isSuccessful()) {
                             if (task.getResult() != null) {
                                 List<Vehicle> VehicleList = task.getResult().toObjects(Vehicle.class);
+                                currentVehicle = VehicleList.get(0);
                                 setVehicleTexts(VehicleList.get(0));
                             }
                         } else {
@@ -107,7 +112,6 @@ public class RepairOrderFragment extends Fragment {
             public void onClick(View view) {
                 Log.d("Clicked", binding.buttonEdit.getText().toString());
                 if (binding.buttonEdit.getText().toString().equals("Edit")) {
-                    enableTextEditing(binding.roNumber);
                     enableTextEditing(binding.year);
                     enableTextEditing(binding.make);
                     enableTextEditing(binding.model);
@@ -118,9 +122,21 @@ public class RepairOrderFragment extends Fragment {
                     disableTextEditing(binding.year);
                     disableTextEditing(binding.make);
                     disableTextEditing(binding.model);
-
+                    currentVehicle.setYear(Integer.parseInt(binding.year.getText().toString()));
+                    currentVehicle.setMake(binding.make.getText().toString());
+                    currentVehicle.setModel(binding.model.getText().toString());
+                    db.collection("vehicles").document("Vehicle_" + currentVehicle.getLP()).set(currentVehicle);
                     binding.buttonEdit.setText("Edit");
                 }
+            }
+        });
+
+        binding.buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("repairOrders").document("RepairOrder_" + currentRo.getNumber()).delete();
+                NavHostFragment.findNavController(RepairOrderFragment.this)
+                        .navigate(R.id.action_repairOrderFragment2_to_SecondFragment);
             }
         });
 
@@ -146,51 +162,55 @@ public class RepairOrderFragment extends Fragment {
     }
 
     public void initTable(Map<String, Integer> repairs) {
-        TableLayout repairTable = (TableLayout) binding.repairTable;
-        TableRow row0 = new TableRow(this.getContext());
+        /*
+        if (Objects.isNull(repairs)) {
+            TableLayout repairTable = (TableLayout) binding.repairTable;
+            TableRow row0 = new TableRow(this.getContext());
 
-        TextView tv0 = new TextView(this.getContext());
-        tv0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
-        tv0.setBackgroundColor(Color.WHITE);
-        tv0.setTextColor(Color.BLACK);
-        tv0.setText("Repair");
-        tv0.setGravity(Gravity.CENTER_HORIZONTAL);
-        tv0.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        row0.addView(tv0);
+            TextView tv0 = new TextView(this.getContext());
+            tv0.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
+            tv0.setBackgroundColor(Color.WHITE);
+            tv0.setTextColor(Color.BLACK);
+            tv0.setText("Repair");
+            tv0.setGravity(Gravity.CENTER_HORIZONTAL);
+            tv0.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            row0.addView(tv0);
 
-        TextView tv1 = new TextView(this.getContext());
-        tv1.setBackgroundColor(Color.WHITE);
-        tv1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
-        tv1.setTextColor(Color.BLACK);
-        tv1.setText("Hours");
-        tv1.setGravity(Gravity.CENTER_HORIZONTAL);
-        tv1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        row0.addView(tv1);
+            TextView tv1 = new TextView(this.getContext());
+            tv1.setBackgroundColor(Color.WHITE);
+            tv1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
+            tv1.setTextColor(Color.BLACK);
+            tv1.setText("Hours");
+            tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+            tv1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            row0.addView(tv1);
 
-        repairTable.addView(row0);
+            repairTable.addView(row0);
 
-        List<String> keys = new ArrayList<String>(repairs.keySet());
+            List<String> keys = new ArrayList<String>(repairs.keySet());
 
-        for (int i = 0; i < repairs.size(); i++) {
-            TableRow row = new TableRow(this.getContext());
+            for (int i = 0; i < repairs.size(); i++) {
+                TableRow row = new TableRow(this.getContext());
 
-            TextView tv2 = new TextView(this.getContext());
-            tv2.setBackgroundColor(Color.WHITE);
-            tv2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
-            tv2.setTextColor(Color.BLACK);
-            tv2.setText(keys.get(i));
-            tv2.setGravity(Gravity.CENTER_HORIZONTAL);
-            row.addView(tv2);
+                TextView tv2 = new TextView(this.getContext());
+                tv2.setBackgroundColor(Color.WHITE);
+                tv2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
+                tv2.setTextColor(Color.BLACK);
+                tv2.setText(keys.get(i));
+                tv2.setGravity(Gravity.CENTER_HORIZONTAL);
+                row.addView(tv2);
 
-            TextView tv3 = new TextView(this.getContext());
-            tv3.setBackgroundColor(Color.WHITE);
-            tv3.setTextColor(Color.BLACK);
-            tv3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
-            tv3.setText(String.valueOf(repairs.get(keys.get(i))));
-            tv3.setGravity(Gravity.CENTER_HORIZONTAL);
-            row.addView(tv3);
+                TextView tv3 = new TextView(this.getContext());
+                tv3.setBackgroundColor(Color.WHITE);
+                tv3.setTextColor(Color.BLACK);
+                tv3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20.0F);
+                tv3.setText(String.valueOf(repairs.get(keys.get(i))));
+                tv3.setGravity(Gravity.CENTER_HORIZONTAL);
+                row.addView(tv3);
 
-            repairTable.addView(row);
+                repairTable.addView(row);
+            }
         }
+        */
     }
 }

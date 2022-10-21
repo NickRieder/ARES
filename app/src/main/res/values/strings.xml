@@ -16,4 +16,5 @@
     <string name="edit">Edit</string>
     <string name="new_repair_order">New Repair Order:</string>
     <string name="submit">submit</string>
+    <string name="delete">delete</string>
 </resources>

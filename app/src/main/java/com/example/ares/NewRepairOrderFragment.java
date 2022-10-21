@@ -61,8 +61,8 @@ public class NewRepairOrderFragment extends Fragment {
                 //Make sure currentRO is filled with values from form:
                 populateObjectsFromForm();
                 //back-end call to save the data inside the currentRO object to the db.
-                db.collection("repairOrders").add(currentRO);
-                db.collection("vehicles").add(currentVehicle);
+                db.collection("repairOrders").document("RepairOrder_" + currentRO.getNumber()).set(currentRO);
+                db.collection("vehicles").document("Vehicle_" + currentVehicle.getLP()).set(currentVehicle);
                 //navigate back to parent page
                 NavHostFragment.findNavController(NewRepairOrderFragment.this)
                         .navigate(R.id.action_newRepairOrderFragment_to_SecondFragment);
@@ -72,12 +72,12 @@ public class NewRepairOrderFragment extends Fragment {
 
     public void populateObjectsFromForm(){
         Repair:
-        currentRO.setId(100);
+        currentRO.setId(0);
         currentRO.setCarPicture("");
         currentRO.setPaperOrder("");
         currentRO.setHours(Integer.parseInt(binding.hours.getText().toString()));
         currentRO.setStatus(binding.status.getText().toString());
-        currentRO.setNum(Integer.parseInt(binding.roNumber.getText().toString()));
+        currentRO.setNumber(Integer.parseInt(binding.roNumber.getText().toString()));
         currentRO.setRepairs(null);
         dateString = binding.date.getText().toString();
         try {
@@ -88,7 +88,7 @@ public class NewRepairOrderFragment extends Fragment {
         }
 
         //Vehicle
-        currentVehicle.setId(100);
+        currentVehicle.setId(0);
         currentVehicle.setMake(binding.make.getText().toString());
         currentVehicle.setModel(binding.model.getText().toString());
         currentVehicle.setYear(Integer.parseInt(binding.year.getText().toString()));

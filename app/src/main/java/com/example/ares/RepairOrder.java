@@ -58,8 +58,8 @@ public class RepairOrder {
         status = newVal;
     }
 
-    public int getNum(){return number;}
-    public void setNum(int newVal){
+
+    public void setNumber(int newVal){
         number = newVal;
     }
 
