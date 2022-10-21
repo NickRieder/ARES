@@ -18,6 +18,19 @@ public class RepairOrder {
     public Map<String, Integer> repairs;
     public int number;
 
+    public RepairOrder(){
+        id = 0;
+        vehicleId = 0;
+        employeeId = 0;
+        date = new Date();
+        hours = 0;
+        status = "new";
+        paperOrder= " ";
+        carPicture= " ";
+        number = 0;
+        repairs.clear();
+    }
+
     public int getVehicleId() {
         return vehicleId;
     }
