@@ -13,16 +13,16 @@ import java.util.Map;
 import java.util.Set;
 
 public class RepairOrder {
-    public int id;
-    public int vehicleId;
-    public int employeeId;
-    public Date date;
-    public int hours;
-    public String status;
-    public String paperOrder;
-    public String carPicture;
-    public Map<String, Integer> repairs;
-    public int number;
+    private int id;
+    private int vehicleId;
+    private int employeeId;
+    private Date date;
+    private int hours;
+    private String status;
+    private String paperOrder;
+    private String carPicture;
+    private Map<String, Integer> repairs;
+    private int number;
 
     public RepairOrder(){
         id = 0;
@@ -37,6 +37,43 @@ public class RepairOrder {
         repairs = new HashMap<String, Integer>();
     }
 
+
+    public int getId(){return id;}
+    public void setId(int newVal){
+        id = newVal;
+    }
+
+    public Date getDate(){return date;}
+    public void setDate(Date newVal){
+        date = newVal;
+    }
+
+    public int getHours(){return hours;}
+    public void setHours(int newVal){
+        hours = newVal;
+    }
+
+    public String getStatus(){return status;}
+    public void setStatus(String newVal){
+        status = newVal;
+    }
+
+    public int getNum(){return number;}
+    public void setNum(int newVal){
+        number = newVal;
+    }
+
+    public String getCarPicture(){return carPicture;}
+    public void setCarPicture(String newVal){
+        carPicture = newVal;
+    }
+
+    public String getPaperOrder(){return paperOrder;}
+    public void setPaperOrder(String newVal){
+        paperOrder = newVal;
+    }
+
+
     public int getVehicleId() {
         return vehicleId;
     }
@@ -47,5 +84,8 @@ public class RepairOrder {
 
     public Map<String, Integer> getRepairs() {
         return repairs;
+    }
+    public void setRepairs(Map<String, Integer> newVal) {
+        repairs = newVal;
     }
 }

@@ -72,21 +72,21 @@ public class NewRepairOrderFragment extends Fragment {
 
     public void populateObjectsFromForm(){
         Repair:
-        currentRO.id = 100;
-        currentRO.paperOrder = "";
-        currentRO.carPicture = "";
-        currentRO.repairs = null;
-        dateString = binding.date.getText().
-                toString();
-        currentRO.number = Integer.parseInt(binding.roNumber.getText().toString());
-        currentRO.hours = Integer.parseInt(binding.hours.getText().toString());
-        currentRO.status = binding.status.getText().toString();
+        currentRO.setId(100);
+        currentRO.setCarPicture("");
+        currentRO.setPaperOrder("");
+        currentRO.setHours(Integer.parseInt(binding.hours.getText().toString()));
+        currentRO.setStatus(binding.status.getText().toString());
+        currentRO.setNum(Integer.parseInt(binding.roNumber.getText().toString()));
+        currentRO.setRepairs(null);
+        dateString = binding.date.getText().toString();
         try {
-            currentRO.date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dateString);
+            currentRO.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dateString));
         } catch (ParseException e) {
             e.printStackTrace();
             Log.d("Error", "Error with format of date input.");
         }
+
         //Vehicle
         currentVehicle.setId(100);
         currentVehicle.setMake(binding.make.getText().toString());
