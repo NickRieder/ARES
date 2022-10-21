@@ -8,6 +8,15 @@ public class Vehicle {
     private String licensePlate;
     private int[] pastRepairs;
 
+    public Vehicle(){
+        id = 0;
+        make = "";
+        model = "";
+        year = 1000;
+        licensePlate = "";
+        pastRepairs = new int[] {0};
+    }
+
     public int getId(){return id;}
     public void setId(int newVal){
         id = newVal;
