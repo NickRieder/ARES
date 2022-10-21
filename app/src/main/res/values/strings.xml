@@ -15,4 +15,5 @@
     <string name="viewRO">View RO</string>
     <string name="edit">Edit</string>
     <string name="new_repair_order">New Repair Order:</string>
+    <string name="submit">submit</string>
 </resources>
