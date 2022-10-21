@@ -34,6 +34,7 @@ public class RepairOrderFragment extends Fragment {
     private FragmentRepairorderBinding binding;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private RepairOrder currentRo;
 
     @Override
     public View onCreateView(
@@ -43,7 +44,7 @@ public class RepairOrderFragment extends Fragment {
 
         Log.d("Creation","onCreateView() triggered!");
         binding = FragmentRepairorderBinding.inflate(inflater, container, false);
-
+        currentRo = new RepairOrder();
         db.collection("repairOrders").whereEqualTo("id", 0)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -53,6 +54,7 @@ public class RepairOrderFragment extends Fragment {
                         if (task.isSuccessful()) {
                             if (task.getResult() != null) {
                                 List<RepairOrder> RepairOrderList = task.getResult().toObjects(RepairOrder.class);
+                                currentRo = RepairOrderList.get(0);
                                 setRoText(RepairOrderList.get(0));
                                 getVehicleInfo(RepairOrderList.get(0).getVehicleId());
                                 initTable(RepairOrderList.get(0).getRepairs());
@@ -116,6 +118,7 @@ public class RepairOrderFragment extends Fragment {
                     disableTextEditing(binding.year);
                     disableTextEditing(binding.make);
                     disableTextEditing(binding.model);
+
                     binding.buttonEdit.setText("Edit");
                 }
             }

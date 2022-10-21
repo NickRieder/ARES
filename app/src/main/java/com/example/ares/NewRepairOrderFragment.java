@@ -34,8 +34,8 @@ public class NewRepairOrderFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        currentRO = null;
-        currentVehicle = null;
+        currentRO = new RepairOrder();
+        currentVehicle = new Vehicle();
         dateString = "";
         binding = FragmentNewrepairorderBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -61,7 +61,7 @@ public class NewRepairOrderFragment extends Fragment {
                 //Make sure currentRO is filled with values from form:
                 populateObjectsFromForm();
                 //back-end call to save the data inside the currentRO object to the db.
-                //db.collection("repairOrders").add(currentRO);
+                db.collection("repairOrders").add(currentRO);
                 db.collection("vehicles").add(currentVehicle);
                 //navigate back to parent page
                 NavHostFragment.findNavController(NewRepairOrderFragment.this)
@@ -76,10 +76,11 @@ public class NewRepairOrderFragment extends Fragment {
         currentRO.paperOrder = "";
         currentRO.carPicture = "";
         currentRO.repairs = null;
-        dateString = binding.date.toString();
-        currentRO.number = Integer.parseInt(binding.roNumber.toString());
-        currentRO.hours = Integer.parseInt(binding.hours.toString());
-        currentRO.status = binding.status.toString();
+        dateString = binding.date.getText().
+                toString();
+        currentRO.number = Integer.parseInt(binding.roNumber.getText().toString());
+        currentRO.hours = Integer.parseInt(binding.hours.getText().toString());
+        currentRO.status = binding.status.getText().toString();
         try {
             currentRO.date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dateString);
         } catch (ParseException e) {
@@ -88,10 +89,10 @@ public class NewRepairOrderFragment extends Fragment {
         }
         //Vehicle
         currentVehicle.setId(100);
-        currentVehicle.setMake(binding.make.toString());
-        currentVehicle.setModel(binding.model.toString());
-        currentVehicle.setYear(Integer.parseInt(binding.year.toString()));
-        currentVehicle.setLP(binding.plate.toString());
+        currentVehicle.setMake(binding.make.getText().toString());
+        currentVehicle.setModel(binding.model.getText().toString());
+        currentVehicle.setYear(Integer.parseInt(binding.year.getText().toString()));
+        currentVehicle.setLP(binding.plate.getText().toString());
         currentVehicle.setPastRepairs(null);
     }
 

@@ -1,12 +1,21 @@
 package com.example.ares;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class Vehicle {
     private int id;
     private String make;
     private String model;
     private int year;
     private String licensePlate;
-    private int[] pastRepairs;
+    private List<Integer> pastRepairs;
 
     public Vehicle(){
         id = 0;
@@ -14,7 +23,7 @@ public class Vehicle {
         model = "";
         year = 1000;
         licensePlate = "";
-        pastRepairs = new int[] {0};
+        pastRepairs = new ArrayList<Integer>();
     }
 
     public int getId(){return id;}
@@ -22,8 +31,8 @@ public class Vehicle {
         id = newVal;
     }
 
-    public int[] getPastRepairs(){return pastRepairs;}
-    public void setPastRepairs(int[] newVal){
+    public List<Integer> getPastRepairs() {return pastRepairs;}
+    public void setPastRepairs(List<Integer> newVal){
         pastRepairs = newVal;
     }
 
@@ -49,7 +58,10 @@ public class Vehicle {
     }
 
     public String getLP(){return licensePlate;}
-    public void setLP(String newVal){
+
+    public void setLP(String newVal) {
         licensePlate = newVal;
     }
+
+
 }
