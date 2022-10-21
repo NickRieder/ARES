@@ -89,7 +89,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:hint="mm/dd/yyyy"
+        android:hint="yyyy-mm-dd"
         android:inputType="date"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/roNumber"

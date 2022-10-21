@@ -3,13 +3,14 @@ package com.example.ares;
 import com.google.firebase.Timestamp;
 
 import java.lang.reflect.Array;
+import java.util.Date;
 import java.util.Map;
 
 public class RepairOrder {
     public int id;
     public int vehicleId;
     public int employeeId;
-    public Timestamp date;
+    public Date date;
     public int hours;
     public String status;
     public String paperOrder;
