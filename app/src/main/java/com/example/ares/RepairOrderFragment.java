@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -107,7 +109,9 @@ public class RepairOrderFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        String imageUri = "https://media.ed.edmunds-media.com/ford/focus-st/2015/oem/2015_ford_focus-st_4dr-hatchback_base_fq_oem_1_1600.jpg";
+        ImageView iv = (ImageView) getActivity().findViewById(R.id.carimg);
+        Picasso.with(getContext()).load(imageUri).into(iv);
         binding.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

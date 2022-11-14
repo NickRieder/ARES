@@ -47,5 +47,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycle_version"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
-
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
