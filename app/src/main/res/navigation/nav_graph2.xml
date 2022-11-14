@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_repairOrderFragment2_to_RecyclerFragment"
             app:destination="@id/RecyclerFragment" />
+        <argument
+            android:name="roNum"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/newRepairOrderFragment"
@@ -47,5 +50,14 @@
         <action
             android:id="@+id/action_RecyclerFragment_to_newRepairOrderFragment"
             app:destination="@id/newRepairOrderFragment" />
+        <action
+            android:id="@+id/action_RecyclerFragment_to_MainActivity"
+            app:destination="@id/MainActivity" />
     </fragment>
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="com.example.ares.MainActivity"
+        android:label="MainActivity"
+        tools:layout="@layout/activity_main"/>
 </navigation>

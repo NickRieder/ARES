@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 public class Vehicle {
     private int id;
@@ -15,7 +17,7 @@ public class Vehicle {
     private String model;
     private int year;
     private String licensePlate;
-    private List<Integer> pastRepairs;
+    private Map<String, Integer> pastRepairs;
 
     public Vehicle(){
         id = 0;
@@ -23,7 +25,7 @@ public class Vehicle {
         model = "";
         year = 1000;
         licensePlate = "";
-        pastRepairs = new ArrayList<Integer>();
+        pastRepairs = new HashMap<>();
     }
 
     public int getId(){return id;}
@@ -31,8 +33,8 @@ public class Vehicle {
         id = newVal;
     }
 
-    public List<Integer> getPastRepairs() {return pastRepairs;}
-    public void setPastRepairs(List<Integer> newVal){
+    public Map<String, Integer> getPastRepairs() {return pastRepairs;}
+    public void setPastRepairs(Map<String, Integer> newVal){
         pastRepairs = newVal;
     }
 
@@ -57,9 +59,9 @@ public class Vehicle {
         model = newVal;
     }
 
-    public String getLP(){return licensePlate;}
+    public String getLicensePlate(){return licensePlate;}
 
-    public void setLP(String newVal) {
+    public void setLicensePlate(String newVal) {
         licensePlate = newVal;
     }
 

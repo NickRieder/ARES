@@ -1,16 +1,8 @@
 package com.example.ares;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.firebase.Timestamp;
-
-import java.lang.reflect.Array;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class RepairOrder {
     private int id;
@@ -81,6 +73,12 @@ public class RepairOrder {
     public int getNumber() {
         return number;
     }
+
+    public int getEmployeeId(){
+        return employeeId;
+    }
+
+    public void setEmployeeId(int newVal){employeeId = newVal;}
 
     public Map<String, Integer> getRepairs() {
         return repairs;

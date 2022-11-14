@@ -62,7 +62,7 @@ public class NewRepairOrderFragment extends Fragment {
                 populateObjectsFromForm();
                 //back-end call to save the data inside the currentRO object to the db.
                 db.collection("repairOrders").document("RepairOrder_" + currentRO.getNumber()).set(currentRO);
-                db.collection("vehicles").document("Vehicle_" + currentVehicle.getLP()).set(currentVehicle);
+                db.collection("vehicles").document("Vehicle_" + currentVehicle.getLicensePlate()).set(currentVehicle);
                 //navigate back to parent page
                 NavHostFragment.findNavController(NewRepairOrderFragment.this)
                         .navigate(R.id.action_newRepairOrderFragment_to_RecyclerFragment);
@@ -88,11 +88,12 @@ public class NewRepairOrderFragment extends Fragment {
         }
 
         //Vehicle
+        
         currentVehicle.setId(0);
         currentVehicle.setMake(binding.make.getText().toString());
         currentVehicle.setModel(binding.model.getText().toString());
         currentVehicle.setYear(Integer.parseInt(binding.year.getText().toString()));
-        currentVehicle.setLP(binding.plate.getText().toString());
+        currentVehicle.setLicensePlate(binding.plate.getText().toString());
         currentVehicle.setPastRepairs(null);
     }
 

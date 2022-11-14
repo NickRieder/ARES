@@ -39,10 +39,8 @@ public class FirstFragment extends Fragment {
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), RecyclerActivity.class);
-                startActivity(i);
-                //NavHostFragment.findNavController(FirstFragment.this)
-                 //       .navigate(R.id.action_FirstFragment_to_RecyclerFragment);
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_RecyclerActivity);
             }
         });
     }

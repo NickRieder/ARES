@@ -49,7 +49,7 @@ public class RepairOrderFragment extends Fragment {
         Log.d("Creation","onCreateView() triggered!");
         binding = FragmentRepairorderBinding.inflate(inflater, container, false);
         currentRo = new RepairOrder();
-        db.collection("repairOrders").whereEqualTo("id", 0)
+        db.collection("repairOrders").whereEqualTo("number", getArguments().getInt("num"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -125,7 +125,7 @@ public class RepairOrderFragment extends Fragment {
                     currentVehicle.setYear(Integer.parseInt(binding.year.getText().toString()));
                     currentVehicle.setMake(binding.make.getText().toString());
                     currentVehicle.setModel(binding.model.getText().toString());
-                    db.collection("vehicles").document("Vehicle_" + currentVehicle.getLP()).set(currentVehicle);
+                    db.collection("vehicles").document("Vehicle_" + currentVehicle.getLicensePlate()).set(currentVehicle);
                     binding.buttonEdit.setText("Edit");
                 }
             }

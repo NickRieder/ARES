@@ -10,42 +10,24 @@
         android:name="com.example.ares.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
-
         <action
-            android:id="@+id/action_FirstFragment_to_RecyclerFragment"
-            app:destination="@id/RecyclerFragment" />
+            android:id="@+id/action_FirstFragment_to_RecyclerActivity"
+            app:destination="@id/RecyclerActivity" />
     </fragment>
     <fragment
         android:id="@+id/repairOrderFragment2"
         android:name="com.example.ares.RepairOrderFragment"
         android:label="fragment_repairorder"
-        tools:layout="@layout/fragment_repairorder" >
-        <action
-            android:id="@+id/action_repairOrderFragment2_to_RecyclerFragment"
-            app:destination="@id/RecyclerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_repairorder" />
     <fragment
         android:id="@+id/newRepairOrderFragment"
         android:name="com.example.ares.NewRepairOrderFragment"
         android:label="NewRepairOrderFragment"
-        tools:layout="@layout/fragment_newrepairorder">
-        <action
-            android:id="@+id/action_newRepairOrderFragment_to_RecyclerFragment"
-            app:destination="@id/RecyclerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/RecyclerFragment"
-        android:name="com.example.ares.RecyclerFragment"
-        android:label="RecyclerFragment"
-        tools:layout="@layout/fragment_recyclerview">
-        <action
-            android:id="@+id/action_RecyclerFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment"/>
-        <action
-            android:id="@+id/action_RecyclerFragment_to_repairOrderFragment2"
-            app:destination="@id/repairOrderFragment2"/>
-        <action
-            android:id="@+id/action_RecyclerFragment_to_newRepairOrderFragment"
-            app:destination="@id/newRepairOrderFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_newrepairorder"/>
+
+    <activity
+        android:id="@+id/RecyclerActivity"
+        android:name="com.example.ares.RecyclerActivity"
+        android:label="RecyclerActivity"
+        tools:layout="@layout/activity_recyclerview"/>
 </navigation>

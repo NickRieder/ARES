@@ -1,42 +1,54 @@
 package com.example.ares;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener {
+import com.example.ares.databinding.ActivityRecyclerviewBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-    RecyclerViewAdapter adapter;
+public class RecyclerActivity extends AppCompatActivity {
+
+
     AppBarConfiguration appBarConfiguration;
+    private ActivityRecyclerviewBinding binding;
+    private List<RepairOrder> repairOrderList;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_recyclerview);
+        binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // data to populate the RecyclerView with
         ArrayList<String> repairOrders = new ArrayList<>();
         repairOrders.add("Order 1");
         repairOrders.add("Order 2");
 
+
         // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvRepairOrder);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(this, repairOrders);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -46,9 +58,14 @@ public class RecyclerActivity extends AppCompatActivity implements RecyclerViewA
                 || super.onSupportNavigateUp();
     }
 
+
+
+
     @Override
     public void onDestroy() {
+        Log.d("msg", "On destroy recycler");
         super.onDestroy();
+        binding = null;
     }
 
     @Override
@@ -73,8 +90,6 @@ public class RecyclerActivity extends AppCompatActivity implements RecyclerViewA
         return true;
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
+
 }
+
