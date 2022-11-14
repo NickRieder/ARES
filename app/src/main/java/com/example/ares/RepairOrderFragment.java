@@ -98,6 +98,7 @@ public class RepairOrderFragment extends Fragment {
         binding.year.setText(String.valueOf(vehicle.getYear()));
         binding.make.setText(vehicle.getMake());
         binding.model.setText(vehicle.getModel());
+        binding.plate.setText(vehicle.getLicensePlate());
     }
 
     public void setRoText(RepairOrder repairOrder) {

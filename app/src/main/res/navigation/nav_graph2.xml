@@ -6,16 +6,6 @@
     app:startDestination="@id/RecyclerFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.ares.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_RecyclerFragment"
-            app:destination="@id/RecyclerFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/repairOrderFragment2"
         android:name="com.example.ares.RepairOrderFragment"
         android:label="fragment_repairorder"
@@ -41,9 +31,6 @@
         android:name="com.example.ares.RecyclerFragment"
         android:label="RecyclerFragment"
         tools:layout="@layout/fragment_recyclerview">
-        <action
-            android:id="@+id/action_RecyclerFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment"/>
         <action
             android:id="@+id/action_RecyclerFragment_to_repairOrderFragment2"
             app:destination="@id/repairOrderFragment2"/>

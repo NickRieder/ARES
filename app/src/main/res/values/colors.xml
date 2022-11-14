@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="ares_red">#C50000</color>
     <color name="ares_red_dark">#840000</color>
+    <color name="gray">#bdbdbd</color>
 
 </resources>

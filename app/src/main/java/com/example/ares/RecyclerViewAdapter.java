@@ -1,6 +1,8 @@
 package com.example.ares;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String animal = Integer.toString(mData.get(position).getNumber());
-        holder.myTextView.setText("RO#: " + animal);
+        SpannableString number = new SpannableString("RO#: " + animal);
+        number.setSpan(new UnderlineSpan(), 0, number.length(), 0);
+        holder.myTextView.setText(number);
     }
 
     // total number of rows

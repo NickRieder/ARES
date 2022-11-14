@@ -36,7 +36,6 @@
         android:layout_marginBottom="672dp"
         android:background="?android:attr/listDivider"
         android:color="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +49,7 @@
         android:background="@null"
         android:focusable="false"
         android:text="New RO"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,73 +60,102 @@
         android:id="@+id/repairInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginTop="20dp"
-        android:text="Repair Information:"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Repair Order #"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-    <EditText
-        android:id="@+id/roNumber"
+    <TextView
+        android:id="@+id/datetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@null"
-        android:hint="Repair Order #"
+        android:text="Date"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@id/date"
+        app:layout_constraintTop_toTopOf="@+id/repairInfo" />
+
+    <EditText
+        android:id="@+id/roNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:hint="e.g. 12345"
         android:inputType="number"
         android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelinemid"
         app:layout_constraintTop_toBottomOf="@id/repairInfo" />
 
     <EditText
         android:id="@+id/date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@null"
         android:hint="yyyy-mm-dd"
         android:inputType="date"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/roNumber"
-        app:layout_constraintTop_toBottomOf="@id/repairInfo" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="@id/guidelinemid"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/datetitle" />
+
+    <TextView
+        android:id="@+id/hourstitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Total Hours"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roNumber" />
 
     <EditText
         android:id="@+id/hours"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@null"
+        android:layout_marginEnd="8dp"
         android:hint="Hours Logged"
         android:inputType="number"
         android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/roNumber" />
+        app:layout_constraintStart_toStartOf="@id/guidelineleft"
+        app:layout_constraintEnd_toEndOf="@id/guidelinemid"
+        app:layout_constraintTop_toBottomOf="@id/hourstitle"/>
+
+    <TextView
+        android:id="@+id/statustitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Status"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@id/datetitle"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <EditText
         android:id="@+id/status"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
-        android:background="@null"
-        android:hint="Status"
+        android:layout_marginStart="8dp"
+        android:hint="e.g. Parts"
         android:inputType="text"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@id/hours"
-        app:layout_constraintTop_toBottomOf="@id/date" />
+        app:layout_constraintStart_toStartOf="@id/guidelinemid"
+        app:layout_constraintEnd_toEndOf="@id/guidelineright"
+        app:layout_constraintTop_toBottomOf="@id/statustitle" />
 
     <TextView
         android:id="@+id/vehicleInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Vehicle Information:"
-        android:textColor="@color/white"
+        android:text="Vehicle Information"
+        android:textColor="@color/black"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +167,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
-        android:background="@null"
         android:hint="Year"
         android:inputType="number"
         android:textSize="25sp"
@@ -152,7 +179,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
         android:layout_marginTop="20dp"
-        android:background="@null"
         android:hint="Make"
         android:inputType="text"
         android:textSize="25sp"
@@ -163,27 +189,46 @@
         android:id="@+id/model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
         android:hint="Model"
         android:inputType="text"
         android:textSize="25sp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/year" />
 
     <EditText
         android:id="@+id/plate"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
         android:hint="License Plate"
         android:inputType="text"
         android:textSize="25sp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="70dp"
         app:layout_constraintStart_toEndOf="@id/model"
         app:layout_constraintTop_toBottomOf="@+id/make" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinemid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
