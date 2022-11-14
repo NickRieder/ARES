@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_RecyclerActivity"
             app:destination="@id/RecyclerActivity" />
+        <action
+            android:id="@+id/action_FirstFragment_to_newUserFragment"
+            app:destination="@id/newUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/repairOrderFragment2"
@@ -30,4 +33,17 @@
         android:name="com.example.ares.RecyclerActivity"
         android:label="RecyclerActivity"
         tools:layout="@layout/activity_recyclerview"/>
+
+    <fragment
+        android:id="@+id/newUserFragment"
+        android:name="com.example.ares.NewUserFragment"
+        android:label="NewUserFragment"
+        tools:layout="@layout/fragment_newuser">
+        <action
+            android:id="@+id/action_newUserFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+
+
 </navigation>

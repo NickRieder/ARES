@@ -17,4 +17,6 @@
     <string name="new_repair_order">New Repair Order:</string>
     <string name="submit">submit</string>
     <string name="delete">delete</string>
+    <string name="Employer">Employer</string>
+    <string name="Employee">Employee</string>
 </resources>
