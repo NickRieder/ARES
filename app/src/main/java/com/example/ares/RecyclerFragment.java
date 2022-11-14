@@ -14,13 +14,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ares.databinding.FragmentSecondBinding;
+import com.example.ares.databinding.FragmentRecyclerviewBinding;
 
 import java.util.List;
 
-public class SecondFragment extends Fragment {
+public class RecyclerFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentRecyclerviewBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,8 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+
+        binding = FragmentRecyclerviewBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -42,8 +43,10 @@ public class SecondFragment extends Fragment {
         binding.buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MainActivity.class);
+                Intent i = new Intent(getActivity(),MainActivity.class);
                 startActivity(i);
+                NavHostFragment.findNavController(RecyclerFragment.this)
+                        .navigate(R.id.action_RecyclerFragment_to_FirstFragment);
             }
         });
 
@@ -53,16 +56,16 @@ public class SecondFragment extends Fragment {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_repairOrderFragment2);
             }
-        });
+        });*/
 
         //create new RO:
         binding.buttonNewRo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_newRepairOrderFragment);
+                NavHostFragment.findNavController(RecyclerFragment.this)
+                        .navigate(R.id.action_RecyclerFragment_to_newRepairOrderFragment);
             }
-        });*/
+        });
     }
 
     @Override

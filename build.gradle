@@ -18,6 +18,11 @@ plugins {
     id 'com.android.library' version '7.2.2' apply false
 }
 
+ext {
+    lifecycle_version = "2.3.1"
+    recyclerview_version = "1.2.1"
+}
+
 
 
 allprojects {

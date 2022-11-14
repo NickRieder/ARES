@@ -1,5 +1,6 @@
 package com.example.ares;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        Log.d("Creation","onCreateView() triggered!");
         binding = FragmentFirstBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
@@ -39,8 +39,10 @@ public class FirstFragment extends Fragment {
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                Intent i = new Intent(getActivity(), RecyclerActivity.class);
+                startActivity(i);
+                //NavHostFragment.findNavController(FirstFragment.this)
+                 //       .navigate(R.id.action_FirstFragment_to_RecyclerFragment);
             }
         });
     }
@@ -48,8 +50,6 @@ public class FirstFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("Destroy","onDestroyView() triggered!");
-        Log.d("Login Info", "Email: " + binding.email.getText().toString() + " Password: " + binding.password.getText().toString());
         binding = null;
     }
 

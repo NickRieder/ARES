@@ -50,7 +50,7 @@ public class NewRepairOrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(NewRepairOrderFragment.this)
-                        .navigate(R.id.action_newRepairOrderFragment_to_SecondFragment);
+                        .navigate(R.id.action_newRepairOrderFragment_to_RecyclerFragment);
             }
         });
 
@@ -65,7 +65,7 @@ public class NewRepairOrderFragment extends Fragment {
                 db.collection("vehicles").document("Vehicle_" + currentVehicle.getLP()).set(currentVehicle);
                 //navigate back to parent page
                 NavHostFragment.findNavController(NewRepairOrderFragment.this)
-                        .navigate(R.id.action_newRepairOrderFragment_to_SecondFragment);
+                        .navigate(R.id.action_newRepairOrderFragment_to_RecyclerFragment);
             }
         });
     }

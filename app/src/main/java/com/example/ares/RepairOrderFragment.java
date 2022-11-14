@@ -136,7 +136,7 @@ public class RepairOrderFragment extends Fragment {
             public void onClick(View view) {
                 db.collection("repairOrders").document("RepairOrder_" + currentRo.getNumber()).delete();
                 NavHostFragment.findNavController(RepairOrderFragment.this)
-                        .navigate(R.id.action_repairOrderFragment2_to_SecondFragment);
+                        .navigate(R.id.action_repairOrderFragment2_to_RecyclerFragment);
             }
         });
 
@@ -144,7 +144,7 @@ public class RepairOrderFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(RepairOrderFragment.this)
-                        .navigate(R.id.action_repairOrderFragment2_to_SecondFragment);
+                        .navigate(R.id.action_repairOrderFragment2_to_RecyclerFragment);
             }
         });
     }
@@ -162,7 +162,7 @@ public class RepairOrderFragment extends Fragment {
     }
 
     public void initTable(Map<String, Integer> repairs) {
-        /*
+/*
         if (Objects.isNull(repairs)) {
             TableLayout repairTable = (TableLayout) binding.repairTable;
             TableRow row0 = new TableRow(this.getContext());

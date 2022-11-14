@@ -3,12 +3,10 @@ package com.example.ares;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,20 +24,21 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d("Creation","onCreate() triggered!");
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         EditText email = (EditText)findViewById(R.id.email);
         EditText password = (EditText)findViewById(R.id.password);
         email.requestFocus();
         password.requestFocus();
         email.setTextColor(Color.BLACK);
         password.setTextColor(Color.BLACK);
+
+
     }
 
     @Override
@@ -74,6 +73,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("Destroy","onDestroy() triggered!");
     }
 }

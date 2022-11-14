@@ -75,7 +75,8 @@
         android:focusable="false"
         android:cursorVisible="false"
         android:background="@null"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:textColor="@color/black"/>
 
 
     <EditText
@@ -86,6 +87,7 @@
         app:layout_constraintTop_toBottomOf="@id/roNumber"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="40dp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:background="@null" />
 
@@ -97,6 +99,7 @@
         app:layout_constraintBottom_toBottomOf="@id/year"
         app:layout_constraintStart_toEndOf="@id/year"
         android:textSize="30dp"
+        android:textColor="@color/black"
         android:background="@null"/>
 
     <EditText
@@ -107,6 +110,7 @@
         app:layout_constraintBottom_toBottomOf="@id/year"
         app:layout_constraintStart_toEndOf="@id/make"
         android:textSize="30dp"
+        android:textColor="@color/black"
         android:background="@null"/>
 
     <TableLayout
