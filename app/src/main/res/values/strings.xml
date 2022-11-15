@@ -19,4 +19,5 @@
     <string name="delete">delete</string>
     <string name="Employer">Employer</string>
     <string name="Employee">Employee</string>
+    <string name="username">username</string>
 </resources>

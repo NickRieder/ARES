@@ -8,16 +8,12 @@ public class Employee {
     private String username;
     private String password;
 
-    //Non-Functional Requirements:
-    private int employerId;
-
     public Employee(){
         id = 0;
         firstName = "";
         lastName = "";
         username = "";
         password = "";
-        employerId = 0;
     }
 
     public int getId(){

@@ -21,16 +21,16 @@
         android:layout_marginTop="100dp"/>
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:background="@drawable/rounded_corners"
         android:color="@color/black"
         android:gravity="center"
-        android:hint="@string/emailHint"
+        android:hint="@string/username"
         android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:minHeight="48dp"
         android:paddingVertical="5dp"
         android:textColorHint="#000000"
@@ -51,7 +51,7 @@
         android:minHeight="48dp"
         android:paddingVertical="5dp"
         android:textColorHint="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/username"
         tools:layout_editor_absoluteX="30dp" />
 
     <Button
