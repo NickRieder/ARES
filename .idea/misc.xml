@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/activity_recyclerview.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/content_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/content_recycler.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_newRepairOrder.xml" value="0.3328125" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_newrepairorder.xml" value="0.25" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_newuser.xml" value="0.25" />
+        <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_recyclerview.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_repairorder.xml" value="0.22" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/Users/Jared/StudioProjects/ARES/app/src/main/res/menu/menu_main.xml" value="0.18645833333333334" />

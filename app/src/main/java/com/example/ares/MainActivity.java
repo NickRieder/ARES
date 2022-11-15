@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        EditText email = (EditText)findViewById(R.id.email);
+        EditText username = (EditText)findViewById(R.id.username);
         EditText password = (EditText)findViewById(R.id.password);
-        email.requestFocus();
+        username.requestFocus();
         password.requestFocus();
-        email.setTextColor(Color.BLACK);
+        username.setTextColor(Color.BLACK);
         password.setTextColor(Color.BLACK);
 
 
