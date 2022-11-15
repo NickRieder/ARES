@@ -108,6 +108,10 @@ public class NewUserFragment extends Fragment {
                             binding.nameText.setVisibility(View.GONE);
                             binding.userInputName.setVisibility(View.GONE);
                             //make proper form fields visible:
+                            binding.usernameText.setVisibility(View.VISIBLE);
+                            binding.userInputUsername.setVisibility(View.VISIBLE);
+                            binding.passwordText.setVisibility(View.VISIBLE);
+                            binding.userInputPassword.setVisibility(View.VISIBLE);
                             binding.firstnameText.setVisibility(View.VISIBLE);
                             binding.userInputFirstname.setVisibility(View.VISIBLE);
                             binding.lastnameText.setVisibility(View.VISIBLE);
@@ -134,6 +138,10 @@ public class NewUserFragment extends Fragment {
                             binding.lastnameText.setVisibility(View.GONE);
                             binding.userInputLastname.setVisibility(View.GONE);
                             //make proper form fields visible:
+                            binding.usernameText.setVisibility(View.VISIBLE);
+                            binding.userInputUsername.setVisibility(View.VISIBLE);
+                            binding.passwordText.setVisibility(View.VISIBLE);
+                            binding.userInputPassword.setVisibility(View.VISIBLE);
                             binding.nameText.setVisibility(View.VISIBLE);
                             binding.userInputName.setVisibility(View.VISIBLE);
                             Log.d("RadioButton","Employer Checked.");
