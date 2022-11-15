@@ -65,7 +65,7 @@ public class RepairOrder {
         paperOrder = newVal;
     }
 
-
+    public void setVehicleId(int newVal){vehicleId = newVal;}
     public int getVehicleId() {
         return vehicleId;
     }

@@ -59,20 +59,7 @@ public class FirstFragment extends Fragment {
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                token = authenticateUserLogin();
-                if (token == 0){
-                    Log.d("Login","Login Successful.");
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("currentEmpId", currentEmpId);
-                    NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
-                } else if (token == 1){
-                    Log.d("Login","No existing account found with this username, login failed.");
-                } else if (token == 2){
-                    Log.d("Login","Existing account found, password did not match, login failed.");
-                } else {
-                    Log.d("Error","Login Error Unresolved.");
-                }
-
+                authenticateUserLogin();
             }
         });
 
@@ -85,34 +72,55 @@ public class FirstFragment extends Fragment {
         });
     }
 
-    public int authenticateUserLogin(){
-        authentication_flag = 0;
-
-        //check for username:
+    public void getEmployees(LoginCallback loginCallback) {
         db.collection("employees").whereEqualTo("username",binding.username.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     if (task.getResult() != null){
-                        //username found:
                         List<Employee> empList = task.getResult().toObjects(Employee.class);
-                        if (binding.password.getText().toString() == empList.get(0).getPassword()){
-                            //passwords match:
-                            authentication_flag = 0;
-                            currentEmpId = empList.get(0).getId();
-                        } else {
-                            //password mismatch:
-                            authentication_flag = 2;
-                        }
-                    } else {
+                        loginCallback.onCallback(empList);
+                    }
+                    else {
                         //username not found:
                         authentication_flag = 1;
                     }
                 }
+
+            }
+        });
+    }
+
+    public void authenticateUserLogin(){
+        authentication_flag = 0;
+
+        //check for username:
+        getEmployees(new LoginCallback() {
+            @Override
+            public void onCallback(List<Employee> empList) {
+                if(empList.isEmpty()) {
+                    authentication_flag = 1;
+                }
+                else {
+                    if(!empList.get(0).getPassword().equals(binding.password.getText().toString())) {
+                        authentication_flag = 2;
+                    }
+                }
+                if (authentication_flag == 0){
+                    Log.d("Login","Login Successful.");
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("currentEmpId", currentEmpId);
+                    NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
+                } else if (authentication_flag == 1){
+                    Log.d("Login","No existing account found with this username, login failed.");
+                } else if (authentication_flag == 2){
+                    Log.d("Login","Existing account found, password did not match, login failed.");
+                } else {
+                    Log.d("Error","Login Error Unresolved.");
+                }
             }
         });
 
-        return authentication_flag;
     }
 
     @Override

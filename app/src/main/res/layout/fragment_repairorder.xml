@@ -50,6 +50,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:color="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/carimg"
+        android:layout_marginTop="16dp"/>
+
     <TextView
         android:id="@+id/ro"
         android:layout_width="wrap_content"
@@ -62,7 +73,7 @@
         android:textColor="@color/black"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/model" />
+        app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     <EditText
         android:id="@+id/roNumber"
@@ -118,16 +129,15 @@
     <EditText
         android:id="@+id/plate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_height="0dp"
         android:background="@null"
         android:cursorVisible="false"
         android:focusable="false"
-        android:padding="0dp"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/model"
-        app:layout_constraintStart_toEndOf="@id/model" />
+        app:layout_constraintTop_toTopOf="@id/model"
+        app:layout_constraintEnd_toEndOf="@id/make"/>
 
 
     <TableLayout
@@ -141,12 +151,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ro" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="179dp" />
 
     <ImageView
         android:id="@+id/carimg"
@@ -155,7 +159,10 @@
         app:layout_constraintStart_toEndOf="@id/plate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/divider"
-        app:layout_constraintBottom_toBottomOf="@id/plate"/>
+        app:layout_constraintBottom_toBottomOf="@id/plate"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

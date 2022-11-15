@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -23,10 +24,15 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.ares.databinding.FragmentRepairorderBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -34,9 +40,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class RepairOrderFragment extends Fragment {
 
     private FragmentRepairorderBinding binding;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference sr = storage.getReference();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RepairOrder currentRo;
@@ -47,7 +57,6 @@ public class RepairOrderFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         Log.d("Creation","onCreateView() triggered!");
         binding = FragmentRepairorderBinding.inflate(inflater, container, false);
         currentRo = new RepairOrder();
@@ -61,6 +70,12 @@ public class RepairOrderFragment extends Fragment {
                             if (task.getResult() != null) {
                                 List<RepairOrder> RepairOrderList = task.getResult().toObjects(RepairOrder.class);
                                 currentRo = RepairOrderList.get(0);
+                                ImageView iv = (ImageView) getActivity().findViewById(R.id.carimg);
+                                Transformation transformation = new RoundedCornersTransformation(10, 0);
+                                Log.d("msg", currentRo.getCarPicture());
+                                if(!currentRo.getCarPicture().equals(" ")) {
+                                    Picasso.get().load(currentRo.getCarPicture()).transform(transformation).into(iv);
+                                }
                                 setRoText(RepairOrderList.get(0));
                                 getVehicleInfo(RepairOrderList.get(0).getVehicleId());
                                 initTable(RepairOrderList.get(0).getRepairs());
@@ -109,9 +124,6 @@ public class RepairOrderFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String imageUri = "https://media.ed.edmunds-media.com/ford/focus-st/2015/oem/2015_ford_focus-st_4dr-hatchback_base_fq_oem_1_1600.jpg";
-        ImageView iv = (ImageView) getActivity().findViewById(R.id.carimg);
-        Picasso.with(getContext()).load(imageUri).into(iv);
         binding.buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

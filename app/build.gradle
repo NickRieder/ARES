@@ -45,7 +45,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage:20.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycle_version"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'jp.wasabeef:picasso-transformations:2.4.0'
 }

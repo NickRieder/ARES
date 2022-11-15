@@ -41,7 +41,6 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        currentEmpId = (int) this.getArguments().get("currentEmpId");
         getRoList(new RoCallback() {
             @Override
             public void onCallback(List<RepairOrder> roList) {

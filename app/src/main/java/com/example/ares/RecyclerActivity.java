@@ -44,12 +44,8 @@ public class RecyclerActivity extends AppCompatActivity {
         binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // data to populate the RecyclerView with
-        ArrayList<String> repairOrders = new ArrayList<>();
-        repairOrders.add("Order 1");
-        repairOrders.add("Order 2");
 
-
+        Log.d("msg", Integer.toString(getIntent().getExtras().getInt("currentEmpId")));
         // set up the RecyclerView
 
     }

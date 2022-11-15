@@ -18,6 +18,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/button_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="SelectIMG"
+        app:layout_constraintTop_toBottomOf="@id/model"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
