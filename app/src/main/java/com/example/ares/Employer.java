@@ -3,6 +3,7 @@ package com.example.ares;
 public class Employer {
     //functional requirements
     private int id;
+    private String name;
     private String username;
     private String password;
     private String status;
@@ -12,6 +13,7 @@ public class Employer {
 
     public Employer(){
         id = 0;
+        name = "";
         username = "";
         password = "";
         status = "N/A";
@@ -42,4 +44,6 @@ public class Employer {
     public void setStatus(String newStatus){
         status = newStatus;
     }
+    public String getName(){ return name; }
+    public void setName(String newName){ name = newName;}
 }

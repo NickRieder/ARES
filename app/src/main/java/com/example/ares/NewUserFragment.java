@@ -71,6 +71,8 @@ public class NewUserFragment extends Fragment {
                 if (userDecision == 1){
                     employee_profile.setUsername(binding.userInputUsername.getText().toString());
                     employee_profile.setPassword(binding.userInputPassword.getText().toString());
+                    employee_profile.setFirstName(binding.userInputFirstname.getText().toString());
+                    employee_profile.setLastName(binding.userInputLastname.getText().toString());
                     employee_profile.setId(getEmployeeId());
                     //save to database here!
                     db.collection("employees").document("Employee_" + employee_profile.getId()).set(employee_profile);
@@ -79,6 +81,7 @@ public class NewUserFragment extends Fragment {
                     employer_profile.setUsername(binding.userInputUsername.getText().toString());
                     employer_profile.setPassword(binding.userInputPassword.getText().toString());
                     employer_profile.setStatus("Active");
+                    employer_profile.setName(binding.userInputName.getText().toString());
                     employer_profile.setId(getEmployerId());
                     //save to database here!
                     db.collection("employers").document("Employer_" + employer_profile.getId()).set(employer_profile);
@@ -101,6 +104,10 @@ public class NewUserFragment extends Fragment {
                         if (checked)
                             //save as employee
                             userDecision = 1;
+                            binding.firstnameText.setVisibility(View.VISIBLE);
+                            binding.userInputFirstname.setVisibility(View.VISIBLE);
+                            binding.lastnameText.setVisibility(View.VISIBLE);
+                            binding.userInputLastname.setVisibility(View.VISIBLE);
                             Log.d("RadioButton","Employee Checked.");
                         break;
                 }
@@ -117,7 +124,9 @@ public class NewUserFragment extends Fragment {
                         if (checked)
                             //save as employer
                             userDecision = 2;
-                        Log.d("RadioButton","Employer Checked.");
+                            binding.nameText.setVisibility(View.VISIBLE);
+                            binding.userInputName.setVisibility(View.VISIBLE);
+                            Log.d("RadioButton","Employer Checked.");
                         break;
                 }
             }
