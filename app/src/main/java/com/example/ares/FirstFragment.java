@@ -108,6 +108,7 @@ public class FirstFragment extends Fragment {
                 }
                 if (authentication_flag == 0){
                     Log.d("Login","Login Successful.");
+                    currentEmpId = empList.get(0).getId();
                     Bundle bundle = new Bundle();
                     bundle.putInt("currentEmpId", currentEmpId);
                     NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
