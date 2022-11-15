@@ -71,15 +71,17 @@ public class NewUserFragment extends Fragment {
                 if (userDecision == 1){
                     employee_profile.setUsername(binding.userInputUsername.getText().toString());
                     employee_profile.setPassword(binding.userInputPassword.getText().toString());
+                    employee_profile.setId(getEmployeeId());
                     //save to database here!
-                    db.collection("employees").document("Employee_" + getEmployeeId()).set(employee_profile);
+                    db.collection("employees").document("Employee_" + employee_profile.getId()).set(employee_profile);
                     Log.d("Creation","New Employee Added to Database.");
                 } else if (userDecision == 2){
                     employer_profile.setUsername(binding.userInputUsername.getText().toString());
                     employer_profile.setPassword(binding.userInputPassword.getText().toString());
                     employer_profile.setStatus("Active");
+                    employer_profile.setId(getEmployerId());
                     //save to database here!
-                    db.collection("employers").document("Employer_" + getEmployerId()).set(employer_profile);
+                    db.collection("employers").document("Employer_" + employer_profile.getId()).set(employer_profile);
                     Log.d("Creation","New Employer Added to Database.");
                 } else {
                     Log.d("RadioButtonError","userDecision not set to 1 or 2.");
