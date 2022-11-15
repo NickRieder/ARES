@@ -24,6 +24,7 @@ import java.util.List;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private int currentEmpId;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //this is used for login purposes:
@@ -38,6 +39,8 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        currentEmpId = 0;
+
         token = 0;
 
         authentication_flag = 0;
@@ -59,8 +62,9 @@ public class FirstFragment extends Fragment {
                 token = authenticateUserLogin();
                 if (token == 0){
                     Log.d("Login","Login Successful.");
-                    NavHostFragment.findNavController(FirstFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_RecyclerActivity);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("currentEmpId", currentEmpId);
+                    NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
                 } else if (token == 1){
                     Log.d("Login","No existing account found with this username, login failed.");
                 } else if (token == 2){
@@ -95,6 +99,7 @@ public class FirstFragment extends Fragment {
                         if (binding.password.getText().toString() == empList.get(0).getPassword()){
                             //passwords match:
                             authentication_flag = 0;
+                            currentEmpId = empList.get(0).getId();
                         } else {
                             //password mismatch:
                             authentication_flag = 2;

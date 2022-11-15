@@ -29,6 +29,7 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
     private FragmentRecyclerviewBinding binding;
     RecyclerViewAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private int currentEmpId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        currentEmpId = (int) this.getArguments().get("currentEmpId");
         getRoList(new RoCallback() {
             @Override
             public void onCallback(List<RepairOrder> roList) {

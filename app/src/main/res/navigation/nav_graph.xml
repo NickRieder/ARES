@@ -32,7 +32,12 @@
         android:id="@+id/RecyclerActivity"
         android:name="com.example.ares.RecyclerActivity"
         android:label="RecyclerActivity"
-        tools:layout="@layout/activity_recyclerview"/>
+        tools:layout="@layout/activity_recyclerview">
+        <argument
+            android:name="currentEmpId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </activity>
 
     <fragment
         android:id="@+id/newUserFragment"

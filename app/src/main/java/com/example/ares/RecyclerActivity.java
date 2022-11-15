@@ -1,5 +1,7 @@
 package com.example.ares;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
     AppBarConfiguration appBarConfiguration;
     private ActivityRecyclerviewBinding binding;
+    private int currentEmpId;
     private List<RepairOrder> repairOrderList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
