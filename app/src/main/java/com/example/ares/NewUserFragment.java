@@ -69,9 +69,18 @@ public class NewUserFragment extends Fragment {
                 //Check userDecision for Employee vs. Employer
                 //Save new account into corresponding database:
                 if (userDecision == 1){
-
+                    employee_profile.setUsername(binding.userInputUsername.getText().toString());
+                    employee_profile.setPassword(binding.userInputPassword.getText().toString());
+                    //save to database here!
+                    db.collection("employees").document("Employee_" + getEmployeeId()).set(employee_profile);
+                    Log.d("Creation","New Employee Added to Database.");
                 } else if (userDecision == 2){
-
+                    employer_profile.setUsername(binding.userInputUsername.getText().toString());
+                    employer_profile.setPassword(binding.userInputPassword.getText().toString());
+                    employer_profile.setStatus("Active");
+                    //save to database here!
+                    db.collection("employers").document("Employer_" + getEmployerId()).set(employer_profile);
+                    Log.d("Creation","New Employer Added to Database.");
                 } else {
                     Log.d("RadioButtonError","userDecision not set to 1 or 2.");
                 }
@@ -91,20 +100,12 @@ public class NewUserFragment extends Fragment {
                             //save as employee
                             userDecision = 1;
                             Log.d("RadioButton","Employee Checked.");
-                            employee_profile.setUsername(binding.userInputUsername.getText().toString());
-                            employee_profile.setPassword(binding.userInputPassword.getText().toString());
-                            //save to database here!
-                            db.collection("employees").document("Employee_" + getEmployeeNum()).set(employee_profile);
                         break;
                     case R.id.radio_employer:
                         if (checked)
                             //save as employer
                             userDecision = 2;
                             Log.d("RadioButton","Employer Checked.");
-                            employer_profile.setUsername(binding.userInputUsername.getText().toString());
-                            employer_profile.setPassword(binding.userInputPassword.getText().toString());
-                            employer_profile.setStatus("Active");
-                            //save to database here!
                         break;
                 }
             }
@@ -112,7 +113,7 @@ public class NewUserFragment extends Fragment {
 
     }
 
-    public int getEmployeeNum(){
+    public int getEmployeeId(){
         result = 0;
         result = RandoGenerator.nextInt(1000);
         //pull all existing employee Id's into int array
@@ -124,10 +125,33 @@ public class NewUserFragment extends Fragment {
                 if (task.isSuccessful()){
                     if (task.getResult() != null){
                         //existing employee already holds current id:
-                        result = getEmployeeNum();
+                        result = getEmployeeId();
                     } else {
                         //current id is unique:
                         employee_profile.setId(result);
+                    }
+                }
+            }
+        });
+        return result;
+    }
+
+    public int getEmployerId(){
+        result = 0;
+        result = RandoGenerator.nextInt(1000);
+        //pull all existing employee Id's into int array
+        //check result with each value of array:
+
+        db.collection("employers").whereEqualTo("id",result).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult() != null){
+                        //existing employer already holds current id:
+                        result = getEmployerId();
+                    } else {
+                        //current id is unique:
+                        employer_profile.setId(result);
                     }
                 }
             }
