@@ -89,8 +89,8 @@ public class NewUserFragment extends Fragment {
             }
         });
 
-        //radio button group:
-        binding.radioGroup.setOnClickListener(new View.OnClickListener() {
+        //radio button employee:
+        binding.radioEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean checked = ((RadioButton) view).isChecked();
@@ -101,11 +101,21 @@ public class NewUserFragment extends Fragment {
                             userDecision = 1;
                             Log.d("RadioButton","Employee Checked.");
                         break;
+                }
+            }
+        });
+
+        //radio button employer:
+        binding.radioEmployer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean checked = ((RadioButton) view).isChecked();
+                switch(view.getId()) {
                     case R.id.radio_employer:
                         if (checked)
                             //save as employer
                             userDecision = 2;
-                            Log.d("RadioButton","Employer Checked.");
+                        Log.d("RadioButton","Employer Checked.");
                         break;
                 }
             }
