@@ -104,6 +104,10 @@ public class NewUserFragment extends Fragment {
                         if (checked)
                             //save as employee
                             userDecision = 1;
+                            //clean slate:
+                            binding.nameText.setVisibility(View.GONE);
+                            binding.userInputName.setVisibility(View.GONE);
+                            //make proper form fields visible:
                             binding.firstnameText.setVisibility(View.VISIBLE);
                             binding.userInputFirstname.setVisibility(View.VISIBLE);
                             binding.lastnameText.setVisibility(View.VISIBLE);
@@ -124,6 +128,12 @@ public class NewUserFragment extends Fragment {
                         if (checked)
                             //save as employer
                             userDecision = 2;
+                            //clean slate:
+                            binding.firstnameText.setVisibility(View.GONE);
+                            binding.userInputFirstname.setVisibility(View.GONE);
+                            binding.lastnameText.setVisibility(View.GONE);
+                            binding.userInputLastname.setVisibility(View.GONE);
+                            //make proper form fields visible:
                             binding.nameText.setVisibility(View.VISIBLE);
                             binding.userInputName.setVisibility(View.VISIBLE);
                             Log.d("RadioButton","Employer Checked.");
