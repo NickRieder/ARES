@@ -1,5 +1,6 @@
 package com.example.ares;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -100,6 +101,9 @@ public class NewUserFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Intent intent = getActivity().getIntent();
+        getActivity().finish();
+        startActivity(intent);
         binding = null;
     }
 }

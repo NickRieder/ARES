@@ -44,7 +44,7 @@
         android:layout_marginTop="58dp"
         android:layout_marginBottom="672dp"
         android:background="?android:attr/listDivider"
-        android:color="@color/black"
+        android:color="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
         android:background="@null"
         android:focusable="false"
         android:text="New RO"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="20dp"
         android:text="Repair Order #"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@id/date"
         app:layout_constraintTop_toTopOf="@+id/repairInfo" />
@@ -118,7 +118,7 @@
         android:layout_margin="16dp"
         android:layout_marginStart="16dp"
         android:text="Total Hours"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roNumber" />
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Status"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@id/datetitle"
         app:layout_constraintTop_toBottomOf="@+id/date" />
@@ -164,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Vehicle Information"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
