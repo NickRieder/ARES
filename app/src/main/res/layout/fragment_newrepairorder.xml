@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewRepairOrderFragment">
-
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/button_back"
@@ -94,6 +99,7 @@
         android:layout_marginEnd="8dp"
         android:hint="e.g. 12345"
         android:inputType="number"
+        android:imeOptions="flagNoExtractUi"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/guidelineleft"
         app:layout_constraintEnd_toEndOf="@id/guidelinemid"
@@ -105,6 +111,7 @@
         android:layout_height="wrap_content"
         android:hint="yyyy-mm-dd"
         android:inputType="date"
+        android:imeOptions="flagNoExtractUi"
         android:textSize="25sp"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="@id/guidelinemid"
@@ -129,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:hint="Hours Logged"
+        android:imeOptions="flagNoExtractUi"
         android:inputType="number"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/guidelineleft"
@@ -152,6 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:hint="e.g. Parts"
+        android:imeOptions="flagNoExtractUi"
         android:inputType="text"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/guidelinemid"
@@ -177,6 +186,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
         android:hint="Year"
+        android:imeOptions="flagNoExtractUi"
         android:inputType="number"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -189,6 +199,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginTop="20dp"
         android:hint="Make"
+        android:imeOptions="flagNoExtractUi"
         android:inputType="text"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/year"
@@ -201,6 +212,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="40dp"
         android:hint="Model"
+        android:imeOptions="flagNoExtractUi"
         android:inputType="text"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -212,6 +224,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginTop="40dp"
+        android:imeOptions="flagNoExtractUi"
         android:hint="License Plate"
         android:inputType="text"
         android:textSize="25sp"
@@ -238,6 +251,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

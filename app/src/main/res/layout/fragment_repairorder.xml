@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".RepairOrderFragment">
-
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <Button
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
@@ -84,6 +89,7 @@
         android:cursorVisible="false"
         android:focusable="false"
         android:textColor="@color/black"
+        android:imeOptions="flagNoExtractUi"
         android:textSize="30dp"
         app:layout_constraintStart_toEndOf="@id/ro"
         app:layout_constraintTop_toTopOf="@id/ro" />
@@ -97,6 +103,7 @@
         android:layout_marginTop="16dp"
         android:background="@null"
         android:textColor="@color/black"
+        android:imeOptions="flagNoExtractUi"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:background="@null"
+        android:imeOptions="flagNoExtractUi"
         android:textColor="@color/black"
         android:textSize="40dp"
         android:textStyle="bold"
@@ -120,6 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:imeOptions="flagNoExtractUi"
         android:padding="0dp"
         android:textColor="@color/black"
         android:textSize="30dp"
@@ -131,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@null"
+        android:imeOptions="flagNoExtractUi"
         android:cursorVisible="false"
         android:focusable="false"
         android:textSize="20dp"
@@ -163,6 +173,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"/>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
