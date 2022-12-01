@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ares_red"
+    android:background="?attr/colorPrimary"
     tools:context=".FirstFragment">
     <ScrollView
         android:layout_height="match_parent"
@@ -12,7 +12,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/ares_red">
+            android:background="?attr/colorPrimary">
             <ImageView
                 android:contentDescription="@string/logo"
                 android:id="@+id/logo"
@@ -26,24 +26,48 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="100dp"/>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                app:layout_constraintTop_toBottomOf="@id/logo"
+                android:layout_margin="30dp"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                android:importantForAutofill="no"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@id/usernameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+<!--
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
-                android:background="@drawable/rounded_corners"
-                android:color="@color/black"
                 android:gravity="center"
                 android:hint="@string/username"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:paddingVertical="5dp"
-                android:textColorHint="#000000"
                 android:imeOptions="flagNoExtractUi"
                 app:layout_constraintTop_toBottomOf="@+id/logo"
-                tools:layout_editor_absoluteX="-16dp" />
-
+                tools:layout_editor_absoluteX="-16dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+-->
+<!--
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
@@ -61,7 +85,28 @@
                 android:imeOptions="flagNoExtractUi"
                 app:layout_constraintTop_toBottomOf="@+id/username"
                 tools:layout_editor_absoluteX="30dp" />
+-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/passwordHint"
+                app:layout_constraintTop_toBottomOf="@id/username"
+                android:layout_margin="30dp"
+                app:startIconDrawable="@drawable/ic_baseline_key_24"
+                android:importantForAutofill="no"
+                >
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@id/passwordText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
