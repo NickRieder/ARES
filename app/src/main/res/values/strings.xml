@@ -20,4 +20,6 @@
     <string name="Employer">Employer</string>
     <string name="Employee">Employee</string>
     <string name="username">username</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
