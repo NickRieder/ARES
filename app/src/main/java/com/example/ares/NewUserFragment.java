@@ -26,8 +26,13 @@ public class NewUserFragment extends Fragment {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    // 1 = employee
+    // 2 = employer
+    private int userDecision;
     private Employee employee_profile;
+    private Employer employer_profile;
     private Random RandoGenerator;
+    private List employeeIdArray;
     private int result;
 
     @Override
@@ -36,8 +41,11 @@ public class NewUserFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         result = 0;
+        employeeIdArray = new ArrayList();
         RandoGenerator = new Random();
+        userDecision = 0;
         employee_profile = new Employee();
+        employer_profile = new Employer();
         binding = FragmentNewuserBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -60,15 +68,85 @@ public class NewUserFragment extends Fragment {
             public void onClick(View view) {
                 //Check userDecision for Employee vs. Employer
                 //Save new account into corresponding database:
-                employee_profile.setUsername(binding.userInputUsername.getText().toString());
-                employee_profile.setPassword(binding.userInputPassword.getText().toString());
-                employee_profile.setFirstName(binding.userInputFirstname.getText().toString());
-                employee_profile.setLastName(binding.userInputLastname.getText().toString());
-                employee_profile.setId(getEmployeeId());
-                //save to database here!
-                db.collection("employees").document("Employee_" + employee_profile.getId()).set(employee_profile);
-                Log.d("Creation","New Employee Added to Database.");
-                NavHostFragment.findNavController(NewUserFragment.this).navigate(R.id.action_newUserFragment_to_FirstFragment);
+                if (userDecision == 1){
+                    employee_profile.setUsername(binding.userInputUsername.getText().toString());
+                    employee_profile.setPassword(binding.userInputPassword.getText().toString());
+                    employee_profile.setFirstName(binding.userInputFirstname.getText().toString());
+                    employee_profile.setLastName(binding.userInputLastname.getText().toString());
+                    employee_profile.setId(getEmployeeId());
+                    //save to database here!
+                    db.collection("employees").document("Employee_" + employee_profile.getId()).set(employee_profile);
+                    Log.d("Creation","New Employee Added to Database.");
+                } else if (userDecision == 2){
+                    employer_profile.setUsername(binding.userInputUsername.getText().toString());
+                    employer_profile.setPassword(binding.userInputPassword.getText().toString());
+                    employer_profile.setStatus("Active");
+                    employer_profile.setName(binding.userInputName.getText().toString());
+                    employer_profile.setId(getEmployerId());
+                    //save to database here!
+                    db.collection("employers").document("Employer_" + employer_profile.getId()).set(employer_profile);
+                    Log.d("Creation","New Employer Added to Database.");
+                } else {
+                    Log.d("RadioButtonError","userDecision not set to 1 or 2.");
+                }
+                NavHostFragment.findNavController(NewUserFragment.this)
+                        .navigate(R.id.action_newUserFragment_to_FirstFragment);
+            }
+        });
+
+        //radio button employee:
+        binding.radioEmployee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean checked = ((RadioButton) view).isChecked();
+                switch(view.getId()) {
+                    case R.id.radio_employee:
+                        if (checked)
+                            //save as employee
+                            userDecision = 1;
+                            //clean slate:
+                            binding.nameText.setVisibility(View.GONE);
+                            binding.userInputName.setVisibility(View.GONE);
+                            //make proper form fields visible:
+                            binding.usernameText.setVisibility(View.VISIBLE);
+                            binding.userInputUsername.setVisibility(View.VISIBLE);
+                            binding.passwordText.setVisibility(View.VISIBLE);
+                            binding.userInputPassword.setVisibility(View.VISIBLE);
+                            binding.firstnameText.setVisibility(View.VISIBLE);
+                            binding.userInputFirstname.setVisibility(View.VISIBLE);
+                            binding.lastnameText.setVisibility(View.VISIBLE);
+                            binding.userInputLastname.setVisibility(View.VISIBLE);
+                            Log.d("RadioButton","Employee Checked.");
+                        break;
+                }
+            }
+        });
+
+        //radio button employer:
+        binding.radioEmployer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean checked = ((RadioButton) view).isChecked();
+                switch(view.getId()) {
+                    case R.id.radio_employer:
+                        if (checked)
+                            //save as employer
+                            userDecision = 2;
+                            //clean slate:
+                            binding.firstnameText.setVisibility(View.GONE);
+                            binding.userInputFirstname.setVisibility(View.GONE);
+                            binding.lastnameText.setVisibility(View.GONE);
+                            binding.userInputLastname.setVisibility(View.GONE);
+                            //make proper form fields visible:
+                            binding.usernameText.setVisibility(View.VISIBLE);
+                            binding.userInputUsername.setVisibility(View.VISIBLE);
+                            binding.passwordText.setVisibility(View.VISIBLE);
+                            binding.userInputPassword.setVisibility(View.VISIBLE);
+                            binding.nameText.setVisibility(View.VISIBLE);
+                            binding.userInputName.setVisibility(View.VISIBLE);
+                            Log.d("RadioButton","Employer Checked.");
+                        break;
+                }
             }
         });
 
@@ -90,6 +168,29 @@ public class NewUserFragment extends Fragment {
                     } else {
                         //current id is unique:
                         employee_profile.setId(result);
+                    }
+                }
+            }
+        });
+        return result;
+    }
+
+    public int getEmployerId(){
+        result = 0;
+        result = RandoGenerator.nextInt(1000);
+        //pull all existing employee Id's into int array
+        //check result with each value of array:
+
+        db.collection("employers").whereEqualTo("id",result).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult() != null){
+                        //existing employer already holds current id:
+                        result = getEmployerId();
+                    } else {
+                        //current id is unique:
+                        employer_profile.setId(result);
                     }
                 }
             }
