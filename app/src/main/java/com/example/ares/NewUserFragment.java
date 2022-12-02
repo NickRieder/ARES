@@ -208,9 +208,6 @@ public class NewUserFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Intent intent = getActivity().getIntent();
-        getActivity().finish();
-        startActivity(intent);
         binding = null;
     }
 }

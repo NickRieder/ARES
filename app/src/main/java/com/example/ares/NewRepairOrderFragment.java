@@ -1,9 +1,12 @@
 package com.example.ares;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -24,10 +28,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -45,10 +51,12 @@ public class NewRepairOrderFragment extends Fragment {
     StorageReference sr = storage.getReference();
 
     private RepairOrder currentRO;
+    private static final int REQUEST_CODE = 200;
     private Vehicle currentVehicle;
     private String dateString;
     private Random rand;
     private int result;
+    private String imageResult;
 
     @Override
     public View onCreateView(
@@ -81,9 +89,9 @@ public class NewRepairOrderFragment extends Fragment {
         binding.buttonImg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                launcher.launch(photoPickerIntent);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CODE);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                launcher.launch(cameraIntent);
             }
         });
 
@@ -102,8 +110,10 @@ public class NewRepairOrderFragment extends Fragment {
     }
 
     public void populateObjectsFromForm(){
+        RecyclerActivity ra = (RecyclerActivity) getActivity();
         Repair:
         currentRO.setId(0);
+        currentRO.setEmployeeId(ra.getCurrentEmpId());
         currentRO.setPaperOrder("");
         currentRO.setHours(Integer.parseInt(binding.hours.getText().toString()));
         currentRO.setStatus(binding.status.getText().toString());
@@ -193,11 +203,38 @@ public class NewRepairOrderFragment extends Fragment {
         return result;
     }
 
+    public String createImageName() {
+        imageResult = String.valueOf(rand.nextInt(1000));
+        sr.child(String.valueOf(imageResult)).list(1).addOnCompleteListener(new OnCompleteListener<ListResult>() {
+            @Override
+            public void onComplete(@NonNull Task<ListResult> task) {
+                if (!task.getResult().getItems().isEmpty()) {
+                    imageResult = createImageName();
+                }
+            }
+        });
+        return imageResult;
+    }
+
     private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result.getResultCode() == Activity.RESULT_OK
                 && result.getData() != null) {
+            Bitmap img = (Bitmap) result.getData().getExtras().get("data");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+            RecyclerActivity ra = (RecyclerActivity) getActivity();
+
+            /*
+            Log.d("msg", result.toString());
+            Log.d("msg", result.getData().getExtras().get());
+            Log.d("msg", result.getData().getData().toString());
             Uri photoUri = result.getData().getData();
-            UploadTask ut = sr.child(photoUri.getLastPathSegment()).putFile(photoUri);
+            UploadTask ut = sr.child(photoUri.getLastPathSegment()).putFile((Bitmap) result.getData().getExtras().get("data"));
+
+             */
+            String imageName = createImageName();
+            UploadTask ut = sr.child(imageName).putBytes(data);
             ut.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -206,7 +243,7 @@ public class NewRepairOrderFragment extends Fragment {
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    sr.child(photoUri.getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    sr.child(imageName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             currentRO.setCarPicture(uri.toString());

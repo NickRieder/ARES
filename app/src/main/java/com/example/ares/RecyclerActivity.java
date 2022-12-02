@@ -42,13 +42,11 @@ public class RecyclerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        currentEmpId = getIntent().getExtras().getInt("currentEmpId");
+        Log.d("msg", Integer.toString(getIntent().getExtras().getInt("currentEmpId")));
         super.onCreate(savedInstanceState);
         binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        Log.d("msg", Integer.toString(getIntent().getExtras().getInt("currentEmpId")));
-        // set up the RecyclerView
-
     }
 
     @Override
@@ -59,7 +57,9 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 
 
-
+    public int getCurrentEmpId() {
+        return currentEmpId;
+    }
 
     @Override
     public void onDestroy() {

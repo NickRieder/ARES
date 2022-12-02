@@ -33,6 +33,8 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        RecyclerActivity ra = (RecyclerActivity) getActivity();
+        currentEmpId = ra.getCurrentEmpId();
         super.onCreate(savedInstanceState);
     }
 
@@ -56,7 +58,7 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
     }
 
     public void getRoList(RoCallback roCallback) {
-        db.collection("repairOrders").whereEqualTo("id", 0)
+        db.collection("repairOrders").whereEqualTo("employeeId", currentEmpId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
