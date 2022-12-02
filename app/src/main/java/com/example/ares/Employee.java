@@ -7,9 +7,11 @@ public class Employee {
     private String lastName;
     private String username;
     private String password;
+    private int employerId;
 
     public Employee(){
         id = 0;
+        employerId = 0;
         firstName = "";
         lastName = "";
         username = "";
@@ -38,4 +40,6 @@ public class Employee {
     public void setFirstName(String name){ firstName = name; }
     public String getLastName(){  return lastName;  }
     public void setLastName(String name){ lastName = name; }
+    public int getEmployerId() {return employerId;}
+    public void setEmployerId(int var){ employerId = var;}
 }

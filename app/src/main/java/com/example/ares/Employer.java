@@ -1,5 +1,7 @@
 package com.example.ares;
 
+import java.util.ArrayList;
+
 public class Employer {
     //functional requirements
     private int id;
@@ -9,7 +11,7 @@ public class Employer {
     private String status;
 
     //non-functional requirements:
-    private int[] employeeList;
+    private ArrayList<Integer> employeeList;
 
     public Employer(){
         id = 0;
@@ -44,6 +46,13 @@ public class Employer {
     public void setStatus(String newStatus){
         status = newStatus;
     }
-    public String getName(){ return name; }
-    public void setName(String newName){ name = newName;}
+    public String getCompanyName(){ return name; }
+    public void setCompanyName(String newName){ name = newName;}
+
+    public ArrayList<Integer> getEmployeeList(){
+        return employeeList;
+    }
+    public void setEmployeeList(ArrayList<Integer> newList){
+        employeeList = newList;
+    }
 }

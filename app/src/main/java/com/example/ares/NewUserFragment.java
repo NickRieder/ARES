@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +18,7 @@ import com.example.ares.databinding.FragmentNewuserBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -33,7 +36,6 @@ public class NewUserFragment extends Fragment {
     private Employee employee_profile;
     private Employer employer_profile;
     private Random RandoGenerator;
-    private List employeeIdArray;
     private int result;
 
     @Override
@@ -42,7 +44,6 @@ public class NewUserFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         result = 0;
-        employeeIdArray = new ArrayList();
         RandoGenerator = new Random();
         userDecision = 0;
         employee_profile = new Employee();
@@ -74,6 +75,7 @@ public class NewUserFragment extends Fragment {
                     employee_profile.setPassword(binding.userInputPassword.getText().toString());
                     employee_profile.setFirstName(binding.userInputFirstname.getText().toString());
                     employee_profile.setLastName(binding.userInputLastname.getText().toString());
+                    employee_profile.setEmployerId(Integer.parseInt(binding.userInputEmployerId.getText().toString()));
                     employee_profile.setId(getEmployeeId());
                     //save to database here!
                     db.collection("employees").document("Employee_" + employee_profile.getId()).set(employee_profile);
@@ -82,7 +84,7 @@ public class NewUserFragment extends Fragment {
                     employer_profile.setUsername(binding.userInputUsername.getText().toString());
                     employer_profile.setPassword(binding.userInputPassword.getText().toString());
                     employer_profile.setStatus("Active");
-                    employer_profile.setName(binding.userInputName.getText().toString());
+                    employer_profile.setCompanyName(binding.userInputCompanyName.getText().toString());
                     employer_profile.setId(getEmployerId());
                     //save to database here!
                     db.collection("employers").document("Employer_" + employer_profile.getId()).set(employer_profile);
@@ -107,7 +109,7 @@ public class NewUserFragment extends Fragment {
                             userDecision = 1;
                             //clean slate:
                             binding.nameText.setVisibility(View.GONE);
-                            binding.userInputName.setVisibility(View.GONE);
+                            binding.userInputCompanyName.setVisibility(View.GONE);
                             //make proper form fields visible:
                             binding.usernameText.setVisibility(View.VISIBLE);
                             binding.userInputUsername.setVisibility(View.VISIBLE);
@@ -117,6 +119,8 @@ public class NewUserFragment extends Fragment {
                             binding.userInputFirstname.setVisibility(View.VISIBLE);
                             binding.lastnameText.setVisibility(View.VISIBLE);
                             binding.userInputLastname.setVisibility(View.VISIBLE);
+                            binding.employerText.setVisibility(View.VISIBLE);
+                            binding.userInputEmployerId.setVisibility(View.VISIBLE);
                             Log.d("RadioButton","Employee Checked.");
                         break;
                 }
@@ -138,13 +142,15 @@ public class NewUserFragment extends Fragment {
                             binding.userInputFirstname.setVisibility(View.GONE);
                             binding.lastnameText.setVisibility(View.GONE);
                             binding.userInputLastname.setVisibility(View.GONE);
+                            binding.employerText.setVisibility(View.GONE);
+                            binding.userInputEmployerId.setVisibility(View.GONE);
                             //make proper form fields visible:
                             binding.usernameText.setVisibility(View.VISIBLE);
                             binding.userInputUsername.setVisibility(View.VISIBLE);
                             binding.passwordText.setVisibility(View.VISIBLE);
                             binding.userInputPassword.setVisibility(View.VISIBLE);
                             binding.nameText.setVisibility(View.VISIBLE);
-                            binding.userInputName.setVisibility(View.VISIBLE);
+                            binding.userInputCompanyName.setVisibility(View.VISIBLE);
                             Log.d("RadioButton","Employer Checked.");
                         break;
                 }
@@ -179,7 +185,7 @@ public class NewUserFragment extends Fragment {
     public int getEmployerId(){
         result = 0;
         result = RandoGenerator.nextInt(1000);
-        //pull all existing employee Id's into int array
+        //pull all existing employer Id's into int array
         //check result with each value of array:
 
         db.collection("employers").whereEqualTo("id",result).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
