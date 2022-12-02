@@ -147,6 +147,7 @@ public class FirstFragment extends Fragment {
                     currentUserId = empList.get(0).getId();
                     Bundle bundle = new Bundle();
                     bundle.putInt("currentEmpId", currentUserId);
+                    bundle.putInt("isEmployer", 0);
                     NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
                 } else if (authentication_flag == 1){
                     Log.d("Login","No existing account found with this username, login failed.");
@@ -177,8 +178,9 @@ public class FirstFragment extends Fragment {
                     Log.d("Login", "Login Successful.");
                     currentUserId = emprList.get(0).getId();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("currentEmprId", currentUserId);
-                    NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_employerLandingFragment, bundle);
+                    bundle.putInt("currentEmpId", currentUserId);
+                    bundle.putInt("isEmployer", 1);
+                    NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_RecyclerActivity, bundle);
                 } else if (authentication_flag == 1) {
                     Log.d("Login", "No existing account found with this username, login failed.");
                 } else if (authentication_flag == 2) {

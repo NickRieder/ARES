@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener{
@@ -30,10 +31,12 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
     RecyclerViewAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private int currentEmpId;
+    private boolean isEmployer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         RecyclerActivity ra = (RecyclerActivity) getActivity();
+        isEmployer = ra.getEmployerStatus();
         currentEmpId = ra.getCurrentEmpId();
         super.onCreate(savedInstanceState);
     }
@@ -43,16 +46,30 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        getRoList(new RoCallback() {
-            @Override
-            public void onCallback(List<RepairOrder> roList) {
-                RecyclerView recyclerView = getView().findViewById(R.id.rvRepairOrder);
-                recyclerView.setLayoutManager(new LinearLayoutManager(RecyclerFragment.this.getContext()));
-                adapter = new RecyclerViewAdapter(RecyclerFragment.this.getContext(), roList);
-                adapter.setClickListener(RecyclerFragment.this);
-                recyclerView.setAdapter(adapter);
-            }
-        });
+        if(isEmployer) {
+            populateEmployeeList(new EmployeeCallback() {
+                @Override
+                public void onCallback(List<Employee> empList) {
+                    RecyclerView recyclerView = getView().findViewById(R.id.rvRepairOrder);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(RecyclerFragment.this.getContext()));
+                    adapter = new RecyclerViewAdapter(RecyclerFragment.this.getContext(), empList, isEmployer);
+                    adapter.setClickListener(RecyclerFragment.this);
+                    recyclerView.setAdapter(adapter);
+                }
+            });
+        }
+        else {
+            getRoList(new RoCallback() {
+                @Override
+                public void onCallback(List<RepairOrder> roList) {
+                    RecyclerView recyclerView = getView().findViewById(R.id.rvRepairOrder);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(RecyclerFragment.this.getContext()));
+                    adapter = new RecyclerViewAdapter(RecyclerFragment.this.getContext(), roList, isEmployer);
+                    adapter.setClickListener(RecyclerFragment.this);
+                    recyclerView.setAdapter(adapter);
+                }
+            });
+        }
         binding = FragmentRecyclerviewBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -76,6 +93,23 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
                 });
     }
 
+    private void populateEmployeeList(EmployeeCallback employeeCallback) {
+        //back-end call to populate employeeList
+        db.collection("employees").whereEqualTo("employerId", currentEmpId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult() != null){
+                        List<Employee> employeeList= task.getResult().toObjects(Employee.class);
+                        employeeCallback.onCallback(employeeList);
+                    } else {
+                        //something happened, error.
+                    }
+                }
+            }
+        });
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d("IDK", "Back pressed");
@@ -87,6 +121,14 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
                         .navigate(R.id.action_RecyclerFragment_to_MainActivity);
             }
         });
+
+        if (!isEmployer) {
+            binding.buttonNewRo.setVisibility(View.VISIBLE);
+        }
+        else {
+            binding.emprNum.setText("Employer number: " + String.valueOf(currentEmpId));
+            binding.emprNum.setVisibility(View.VISIBLE);
+        }
 
         /*binding.buttonRo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +157,11 @@ public class RecyclerFragment extends Fragment implements RecyclerViewAdapter.It
 
     @Override
     public void onItemClick(View view, int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("num", Integer.parseInt(adapter.getItem(position)));
-        NavHostFragment.findNavController(RecyclerFragment.this).navigate(R.id.action_RecyclerFragment_to_repairOrderFragment2, bundle);
+        if (!isEmployer) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("num", Integer.parseInt(adapter.getItem(position)));
+            NavHostFragment.findNavController(RecyclerFragment.this).navigate(R.id.action_RecyclerFragment_to_repairOrderFragment2, bundle);
+        }
     }
 
 }

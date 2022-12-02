@@ -37,13 +37,15 @@ public class RecyclerActivity extends AppCompatActivity {
     AppBarConfiguration appBarConfiguration;
     private ActivityRecyclerviewBinding binding;
     private int currentEmpId;
-    private List<RepairOrder> repairOrderList;
+    private int isEmployer;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        isEmployer = getIntent().getExtras().getInt("isEmployer");
         currentEmpId = getIntent().getExtras().getInt("currentEmpId");
-        Log.d("msg", Integer.toString(getIntent().getExtras().getInt("currentEmpId")));
+
         super.onCreate(savedInstanceState);
         binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,6 +61,10 @@ public class RecyclerActivity extends AppCompatActivity {
 
     public int getCurrentEmpId() {
         return currentEmpId;
+    }
+
+    public boolean getEmployerStatus() {
+        return isEmployer == 1;
     }
 
     @Override

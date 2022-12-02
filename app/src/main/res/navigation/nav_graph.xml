@@ -16,20 +16,7 @@
         <action
             android:id="@+id/action_FirstFragment_to_newUserFragment"
             app:destination="@id/newUserFragment" />
-        <action
-            android:id="@+id/action_FirstFragment_to_employerLandingFragment"
-            app:destination="@id/employerLandingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/repairOrderFragment2"
-        android:name="com.example.ares.RepairOrderFragment"
-        android:label="fragment_repairorder"
-        tools:layout="@layout/fragment_repairorder" />
-    <fragment
-        android:id="@+id/newRepairOrderFragment"
-        android:name="com.example.ares.NewRepairOrderFragment"
-        android:label="NewRepairOrderFragment"
-        tools:layout="@layout/fragment_newrepairorder"/>
 
     <activity
         android:id="@+id/RecyclerActivity"
@@ -49,15 +36,6 @@
         tools:layout="@layout/fragment_newuser">
         <action
             android:id="@+id/action_newUserFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/employerLandingFragment"
-        android:name="com.example.ares.EmployerLandingFragment"
-        android:label="fragment_employer_landing"
-        tools:layout="@layout/fragment_employer_landing" >
-        <action
-            android:id="@+id/action_employerLandingFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 

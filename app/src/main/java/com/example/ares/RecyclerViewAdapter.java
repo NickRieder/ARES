@@ -15,14 +15,22 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<RepairOrder> mData = new ArrayList<>();
+    private List<RepairOrder> mDataRo = new ArrayList<>();
+    private List<Employee> mDataEm = new ArrayList<>();
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private boolean isEmpr;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<RepairOrder> data) {
+    RecyclerViewAdapter(Context context, Object l, boolean isEmployer) {
+        this.isEmpr = isEmployer;
+        if (isEmployer) {
+            this.mDataEm = (List<Employee>) l;
+        }
+        else {
+            this.mDataRo = (List<RepairOrder>) l;
+        }
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
     }
 
     // inflates the row layout from xml when needed
@@ -35,20 +43,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = Integer.toString(mData.get(position).getNumber());
-        SpannableString number = new SpannableString("RO#: " + animal);
-        number.setSpan(new UnderlineSpan(), 0, number.length(), 0);
-        holder.myTextView.setText(number);
+        if (isEmpr) {
+            String animal = mDataEm.get(position).getFirstName() + " " + mDataEm.get(position).getLastName();
+            SpannableString name = new SpannableString(animal);
+            name.setSpan(new UnderlineSpan(), 0, name.length(), 0);
+            holder.myTextView.setText(name);
+        }
+        else {
+            String animal = Integer.toString(mDataRo.get(position).getNumber());
+            SpannableString number = new SpannableString("RO#: " + animal);
+            number.setSpan(new UnderlineSpan(), 0, number.length(), 0);
+            holder.myTextView.setText(number);
+        }
+
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        if (mData == null) {
-            return 0;
+        if (isEmpr) {
+            if (mDataEm == null) {
+                return 0;
+            }
+            else {
+                return mDataEm.size();
+            }
         }
         else {
-            return mData.size();
+            if (mDataRo == null) {
+                return 0;
+            }
+            else {
+                return mDataRo.size();
+            }
         }
     }
 
@@ -71,7 +98,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // convenience method for getting data at click position
     String getItem(int id) {
-        return Integer.toString(mData.get(id).getNumber());
+        if (isEmpr) {
+            return Integer.toString(mDataEm.get(id).getEmployerId());
+        }
+        else {
+            return Integer.toString(mDataRo.get(id).getNumber());
+        }
     }
 
     // allows clicks events to be caught
