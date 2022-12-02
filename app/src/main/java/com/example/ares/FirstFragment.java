@@ -1,11 +1,14 @@
 package com.example.ares;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.ares.databinding.FragmentFirstBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -70,10 +74,22 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_newUserFragment);
             }
         });
+
+        binding.passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    authenticateUserLogin();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
     }
 
     public void getEmployees(LoginCallback loginCallback) {
-        db.collection("employees").whereEqualTo("username",binding.username.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("employees").whereEqualTo("username",binding.usernameText.getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
@@ -102,7 +118,7 @@ public class FirstFragment extends Fragment {
                     authentication_flag = 1;
                 }
                 else {
-                    if(!empList.get(0).getPassword().equals(binding.password.getText().toString())) {
+                    if(!empList.get(0).getPassword().equals(binding.passwordText.getText().toString())) {
                         authentication_flag = 2;
                     }
                 }

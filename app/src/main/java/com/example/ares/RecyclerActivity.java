@@ -3,11 +3,13 @@ package com.example.ares;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +45,6 @@ public class RecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRecyclerviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         Log.d("msg", Integer.toString(getIntent().getExtras().getInt("currentEmpId")));
         // set up the RecyclerView
